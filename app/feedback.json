@@ -72,6 +72,15 @@
       ]
     },
     {
+      "name": "post",
+      "fields": [
+        {
+          "name": "title",
+          "flavor": "name"
+        }
+      ]
+    },
+    {
       "name": "cookie_token",
       "fields": [
         {
