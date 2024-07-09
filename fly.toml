@@ -23,5 +23,5 @@ primary_region = 'lax'
 
 [mounts]
   source = 'data'
-  destination = '/data'
+  destination = '/Users/aa'
 
