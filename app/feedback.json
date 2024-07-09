@@ -77,6 +77,15 @@
         {
           "name": "title",
           "flavor": "name"
+        },
+        {
+          "name": "url",
+          "flavor": "name"
+        },
+        {
+          "name": "id_reddit",
+          "flavor": "name",
+          "index": "unique"
         }
       ]
     },

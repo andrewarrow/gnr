@@ -45,9 +45,11 @@ func printLink(a *goquery.Selection) {
 	linkText := a.Text()
 	href, exists := a.Attr("href")
 	if exists {
-		fmt.Printf("Link text: %s\n", linkText)
 		if strings.HasPrefix(href, "/r/GunsNRoses/comments") {
-			fmt.Printf("Href: %s\n", href)
+			fmt.Printf("Link text: %s\n", linkText)
+			tokens := strings.Split(href, "/")
+			id := tokens[4]
+			fmt.Printf(id)
 		}
 	}
 }
