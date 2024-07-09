@@ -6,7 +6,7 @@ go 1.21.0
 
 require (
 	github.com/PuerkitoBio/goquery v1.9.2
-	github.com/andrewarrow/feedback v0.0.0-20240707133140-a098673d3e3a
+	github.com/andrewarrow/feedback v0.0.0-20240709222316-54ae6da922f7
 )
 
 require (

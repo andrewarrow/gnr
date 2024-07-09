@@ -10,6 +10,7 @@ if [ $? -eq 0 ]; then
     rm json.wasm.gz
     gzip -f json.wasm
     cd ../..
+    export DATABASE_URL=gnr
     tailwindcss -i assets/css/tail.components.css -o assets/css/tail.min.css --minify
     uuid=$(uuidgen); go build -ldflags="-X main.buildTag=$uuid"
     echo 3

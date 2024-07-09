@@ -15,7 +15,8 @@ var items = []*models.BaseModel{}
 
 func GetPosts(sub string) []*models.BaseModel {
 	//htmlString := doRedditGet()
-	htmlString, _ := os.ReadFile("/data/guns.txt")
+	//htmlString, _ := os.ReadFile("/data/guns.txt")
+	htmlString, _ := os.ReadFile("guns.txt")
 
 	html := replaceSmartQuotes(string(htmlString))
 	doc, _ := goquery.NewDocumentFromReader(strings.NewReader(html))
