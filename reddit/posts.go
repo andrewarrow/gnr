@@ -1,7 +1,6 @@
 package reddit
 
 import (
-	"bytes"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -18,7 +17,8 @@ func GetPosts(sub string) []*models.BaseModel {
 	//htmlString := doRedditGet()
 	htmlString, _ := os.ReadFile("/Users/aa/Documents/guns.txt")
 
-	doc, _ := goquery.NewDocumentFromReader(bytes.NewReader(htmlString))
+	html := replaceSmartQuotes(string(htmlString))
+	doc, _ := goquery.NewDocumentFromReader(strings.NewReader(html))
 
 	processDocument(doc)
 
@@ -103,4 +103,19 @@ func doApiRedditGet() string {
 	}
 
 	return string(b)
+}
+
+func replaceSmartQuotes(input string) string {
+	// Use strings.NewReplacer to create a replacer for smart quotes
+	replacer := strings.NewReplacer(
+		string('\u201C'), "\"", // Left double quote
+		string('\u201D'), "\"", // Right double quote
+		string('\u2018'), "'", // Left single quote
+		string('\u2019'), "'", // Right single quote
+		"â", "'",
+		"â", "\"",
+		"â", "\"",
+	)
+
+	return replacer.Replace(input)
 }
