@@ -1,6 +1,10 @@
 package app
 
-import "github.com/andrewarrow/feedback/router"
+import (
+	"gnr/reddit"
+
+	"github.com/andrewarrow/feedback/router"
+)
 
 func Seed(c *router.Context) {
 	posts := reddit.GetPosts("gunsnroses")

@@ -32,7 +32,7 @@ func main() {
 
 	if arg == "seed" {
 		r := router.NewRouter("DATABASE_URL", embeddedFile)
-		c := t.ToContext()
+		c := r.ToContext()
 		app.Seed(c)
 	} else if arg == "render" {
 		router.RenderMarkup()
