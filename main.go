@@ -2,10 +2,10 @@ package main
 
 import (
 	"embed"
+	"gnr/app"
 	"math/rand"
 	"os"
 	"time"
-	"gnr/app"
 
 	"github.com/andrewarrow/feedback/router"
 )
@@ -30,7 +30,10 @@ func main() {
 
 	arg := os.Args[1]
 
-	if arg == "import" {
+	if arg == "seed" {
+		r := router.NewRouter("DATABASE_URL", embeddedFile)
+		c := t.ToContext()
+		app.Seed(c)
 	} else if arg == "render" {
 		router.RenderMarkup()
 	} else if arg == "run" {
