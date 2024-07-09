@@ -12,6 +12,8 @@ import (
 	"github.com/andrewarrow/feedback/models"
 )
 
+var items = []*models.BaseModel{}
+
 func GetPosts(sub string) []*models.BaseModel {
 	//htmlString := doRedditGet()
 	htmlString, _ := os.ReadFile("/Users/aa/Documents/guns.txt")
@@ -20,7 +22,7 @@ func GetPosts(sub string) []*models.BaseModel {
 
 	processDocument(doc)
 
-	return nil
+	return items
 }
 
 func processDocument(doc *goquery.Document) {
@@ -50,6 +52,9 @@ func printLink(a *goquery.Selection) {
 			tokens := strings.Split(href, "/")
 			id := tokens[4]
 			fmt.Printf(id)
+			m := map[string]any{"id_reddit": id}
+			m["title"] = linkText
+			items = append(items, models.NewBase(m))
 		}
 	}
 }
