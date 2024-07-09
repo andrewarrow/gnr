@@ -7,7 +7,6 @@ go 1.21.0
 require (
 	github.com/PuerkitoBio/goquery v1.9.2
 	github.com/andrewarrow/feedback v0.0.0-20240707133140-a098673d3e3a
-	golang.org/x/text v0.14.0
 )
 
 require (
@@ -66,6 +65,7 @@ require (
 	golang.org/x/oauth2 v0.16.0 // indirect
 	golang.org/x/sync v0.6.0 // indirect
 	golang.org/x/sys v0.19.0 // indirect
+	golang.org/x/text v0.14.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
 	google.golang.org/api v0.155.0 // indirect
 	google.golang.org/appengine v1.6.8 // indirect

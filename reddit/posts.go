@@ -112,6 +112,7 @@ func replaceSmartQuotes(input string) string {
 		string('\u201D'), "\"", // Right double quote
 		string('\u2018'), "'", // Left single quote
 		string('\u2019'), "'", // Right single quote
+		string('\u00B4'), "'", // Acute accent (´)
 		"â", "'",
 		"â", "\"",
 		"â", "\"",
