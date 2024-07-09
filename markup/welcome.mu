@@ -10,4 +10,9 @@ div p-0
           was found: GNR Logo Design, Inspiration for a Unique Identity. Modern Elegance and Creative Design. Watermark Your Success with the Striking this Logo.
       div flex justify-center
         img src=logo.png rounded-full
+      div mt-9 space-y-3
+      {{ range $i, $item := .items }}
+        div
+          {{ $item.title }}
+      {{ end }}
 
