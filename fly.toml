@@ -17,11 +17,46 @@ primary_region = 'lax'
   processes = ['app']
 
 [[vm]]
-  memory = '1gb'
+  memory = '2gb'
   cpu_kind = 'shared'
   cpus = 1
 
-[mounts]
+[[services]]
+  internal_port = 9200
+  protocol = "tcp"
+  force_https = true
+
+[[services.ports]]
+  handlers = ["http"]
+  port = "443"
+
+[[services.ports]]
+  handlers = ["tls", "http"]
+  port = "80"
+
+
+[[services]]
+  internal_port = 5601
+  protocol = "tcp"
+  force_https = true
+
+[[services.ports]]
+  handlers = ["http"]
+  port = "5601"
+
+[[services.tcp_checks]]
+  interval = "10s"
+  timeout = "2s"
+  grace_period = "5s"
+  restart_limit = 0
+
+[[mounts]]
   source = 'data'
   destination = '/Users/aa'
 
+[[mounts]]
+  source = "elasticsearch_data"
+  destination = "/usr/share/elasticsearch/data"
+
+[env]
+  discovery.type = "single-node"
