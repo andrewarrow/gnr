@@ -18,7 +18,7 @@ COPY kibana.yml /usr/share/kibana/config/kibana.yml
 
 FROM debian:bookworm
 RUN apt-get update
-RUN apt-get install -y vim jq wget curl openjdk-17-jre-headless htop
+RUN apt-get install -y vim jq wget curl openjdk-17-jre-headless htop procps rsyslog
 RUN rm -rf /var/lib/apt/lists/*
 ENV discovery.type=single-node
 ENV ELASTICSEARCH_HOSTS=http://localhost:9200
