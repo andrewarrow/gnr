@@ -14,10 +14,24 @@ import json
 from bs4 import BeautifulSoup
 
 def run():
-    route = f"https://www.reddit.com/r/GunsNRoses/comments/1dzpdu9/which_track_on_appetite_for_destruction_would_you/"
+    route = f"https://old.reddit.com/r/GunsNRoses/new/"
     options = Options()
+    options.headless = True
+    options.add_argument("--disable-blink-features=AutomationControlled")
+    options.add_argument("--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:127.0) Gecko/20100101 Firefox/127.0")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-infobars")
+    options.add_argument("--disable-extensions")
     options.add_argument('-headless')
     browser = webdriver.Chrome(options=options)
+    browser.execute_cdp_cmd('Page.addScriptToEvaluateOnNewDocument', {
+    'source': '''
+        Object.defineProperty(navigator, 'webdriver', {
+            get: () => undefined
+        })
+    '''
+    })
     browser.get(route)
     wait = WebDriverWait(browser, 10)
     wait.until(EC.presence_of_element_located((By.TAG_NAME, 'body')))
