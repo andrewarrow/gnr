@@ -5,6 +5,33 @@ primary_region = 'lax'
   [build.args]
     GO_VERSION = '1.21.0'
 
+[[services]]
+  internal_port = 8080
+  protocol = "tcp"
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
+  [[services.routes]]
+    handle = "/"
+    destination = "http_service"
+
+[[services]]
+  internal_port = 5601
+  protocol = "tcp"
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
+  [[services.routes]]
+    handle = "/kibana"
+    destination = "kibana_service"
+
+
 [env]
   PORT = '8080'
   discovery.type = "single-node"
@@ -22,46 +49,7 @@ primary_region = 'lax'
   cpu_kind = 'shared'
   cpus = 1
 
-[[services]]
-  internal_port = 9200
-  protocol = "tcp"
-  force_https = true
-
-[[services.ports]]
-  handlers = ["http"]
-  port = "443"
-
-[[services.ports]]
-  handlers = ["tls", "http"]
-  port = "80"
-
-
-[[services]]
-  internal_port = 5601
-  protocol = "tcp"
-  force_https = true
-
-[[services.ports]]
-  handlers = ["http"]
-  port = "5601"
-
-[[services.tcp_checks]]
-  interval = "10s"
-  timeout = "2s"
-  grace_period = "5s"
-  restart_limit = 0
-
 [[mounts]]
   source = 'data'
   destination = '/Users/aa'
 
-[[services.routes]]
-  handle = "gnr-bold-leaf-1886.fly.dev"
-  destination = "http_service"
-  port = 8080
-
-# Route for Kibana URL to internal port 5601
-[[services.routes]]
-  handle = "gnr-kibana.fly.dev"
-  destination = "http_service"
-  port = 5601
