@@ -2,7 +2,6 @@ ARG GO_VERSION=1.21.0
 FROM golang:${GO_VERSION}-bookworm as builder
 
 RUN mkdir -p /Users/aa/bucket
-RUN mkdir -p /Users/aa/elasticsearch
 WORKDIR /usr/src/app
 COPY go.mod go.sum ./
 RUN go mod download && go mod verify
@@ -24,7 +23,7 @@ RUN rm -rf /var/lib/apt/lists/*
 ENV discovery.type=single-node
 ENV ELASTICSEARCH_HOSTS=http://localhost:9200
 ENV ES_JAVA_OPTS="-Xms512m -Xmx512m"
-ENV path.data="/Users/aa/elasticsearch"
+ENV path.data="/Users/aa/private"
 EXPOSE 8080 9200 5601
 VOLUME ["/usr/share/elasticsearch/data"]
 
@@ -35,6 +34,6 @@ COPY --from=kibana /usr/share/kibana /usr/share/kibana
 
 RUN adduser elasticsearch
 RUN chown -R elasticsearch:elasticsearch /usr/share/elasticsearch
-RUN chown -R elasticsearch:elasticsearch /Users/aa/elasticsearch
+RUN chown -R elasticsearch:elasticsearch /Users/aa/private
 
-CMD ["sh", "-c", "/usr/local/bin/run-app run 8080 & su elasticsearch -c '/usr/share/elasticsearch/bin/elasticsearch' & /usr/share/kibana/bin/kibana --allow-root"]
+CMD ["sh", "-c", "mkdir -p /Users/aa/private & chown -R elasticsearch:elasticsearch /Users/aa/private & /usr/local/bin/run-app run 8080 & su elasticsearch -c '/usr/share/elasticsearch/bin/elasticsearch' & /usr/share/kibana/bin/kibana --allow-root"]
