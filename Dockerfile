@@ -10,7 +10,7 @@ ENV DATABASE_URL=gnr
 RUN go build -v -o /usr/src/app/run-app .
 
 FROM docker.elastic.co/elasticsearch/elasticsearch:7.17.3 AS elasticsearch
-COPY elasticsearch.yml /usr/share/kibana/config/elasticsearch.yml
+copy elasticsearch.yml /usr/share/elasticsearch/config/elasticsearch.yml
 
 FROM docker.elastic.co/kibana/kibana:7.17.3 AS kibana
 COPY kibana.yml /usr/share/kibana/config/kibana.yml
