@@ -16,7 +16,7 @@ from bs4 import BeautifulSoup
 def run():
     route = f"https://old.reddit.com/r/GunsNRoses/new/"
     options = Options()
-    options.headless = True
+    #options.headless = True
     options.add_argument("--disable-blink-features=AutomationControlled")
     options.add_argument("--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:127.0) Gecko/20100101 Firefox/127.0")
     options.add_argument("--no-sandbox")
@@ -45,5 +45,7 @@ def run():
     soup = BeautifulSoup(str(soup), 'html.parser')
     formatted_html = soup.prettify()
     print(formatted_html)
+    #random_sleep_time = 9
+    #time.sleep(random_sleep_time)
 
 run()
