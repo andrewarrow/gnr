@@ -6,19 +6,6 @@ primary_region = 'lax'
     GO_VERSION = '1.21.0'
 
 [[services]]
-  internal_port = 8080
-  protocol = "tcp"
-  [[services.ports]]
-    port = 80
-    handlers = ["http"]
-  [[services.ports]]
-    port = 443
-    handlers = ["tls", "http"]
-  [[services.routes]]
-    handle = "/"
-    destination = "http_service"
-
-[[services]]
   internal_port = 5601
   protocol = "tcp"
   [[services.ports]]
@@ -28,9 +15,21 @@ primary_region = 'lax'
     port = 443
     handlers = ["tls", "http"]
   [[services.routes]]
-    handle = "/kibana"
+    handle = "/kibanai/*"
     destination = "kibana_service"
 
+[[services]]
+  internal_port = 8080
+  protocol = "tcp"
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
+  [[services.routes]]
+    handle = "/*"
+    destination = "http_service"
 
 [env]
   PORT = '8080'
