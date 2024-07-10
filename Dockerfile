@@ -29,6 +29,8 @@ COPY --from=builder /usr/src/app/run-app /usr/local/bin/
 COPY --from=elasticsearch /usr/share/elasticsearch /usr/share/elasticsearch
 COPY --from=kibana /usr/share/kibana /usr/share/kibana
 
+COPY sysctl.conf /etc/sysctl.conf
+COPY limits.conf /etc/security/limits.conf
 RUN adduser elasticsearch
 RUN chown -R elasticsearch:elasticsearch /usr/share/elasticsearch
 
