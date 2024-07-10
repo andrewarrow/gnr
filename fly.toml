@@ -7,6 +7,7 @@ primary_region = 'lax'
 
 [env]
   PORT = '8080'
+  discovery.type = "single-node"
 
 [http_service]
   internal_port = 8080
@@ -57,6 +58,3 @@ primary_region = 'lax'
 [[mounts]]
   source = "elasticsearch_data"
   destination = "/usr/share/elasticsearch/data"
-
-[env]
-  discovery.type = "single-node"
