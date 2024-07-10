@@ -11,7 +11,7 @@ RUN go build -v -o /usr/src/app/run-app .
 
 FROM debian:bookworm
 RUN apt-get update
-RUN apt-get install -y vim
+RUN apt-get install -y vim jq wget curl
 
 COPY --from=builder /usr/src/app/run-app /usr/local/bin/
 CMD ["/usr/local/bin/run-app", "run", "8080"]
