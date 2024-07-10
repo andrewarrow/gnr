@@ -30,8 +30,10 @@ COPY --from=builder /usr/src/app/run-app /usr/local/bin/
 COPY --from=elasticsearch /usr/share/elasticsearch /usr/share/elasticsearch
 COPY --from=kibana /usr/share/kibana /usr/share/kibana
 
-
 RUN adduser elasticsearch
 RUN chown -R elasticsearch:elasticsearch /usr/share/elasticsearch
+
+RUN /usr/share/elasticsearch/bin/elasticsearch-users useradd aa -p 'iheartfly'
+RUN /usr/share/elasticsearch/bin/elasticsearch-users roles aa -a superuser
 
 CMD ["sh", "-c", "mkdir -p /Users/aa/private & chown -R elasticsearch:elasticsearch /Users/aa/private & /usr/local/bin/run-app run 8080 & su elasticsearch -c '/usr/share/elasticsearch/bin/elasticsearch' & /usr/share/kibana/bin/kibana --allow-root"]
