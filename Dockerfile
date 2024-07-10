@@ -31,11 +31,10 @@ COPY --from=kibana /usr/share/kibana /usr/share/kibana
 
 COPY sysctl.conf /etc/sysctl.conf
 COPY limits.conf /etc/security/limits.conf
-RUN sysctl -p
 RUN adduser elasticsearch
 RUN chown -R elasticsearch:elasticsearch /usr/share/elasticsearch
 
 RUN /usr/share/elasticsearch/bin/elasticsearch-users useradd aa -p 'iheartfly'
 RUN /usr/share/elasticsearch/bin/elasticsearch-users roles aa -a superuser
 
-CMD ["sh", "-c", "mkdir -p /Users/aa/private & chown -R elasticsearch:elasticsearch /Users/aa/private & /usr/local/bin/run-app run 8080 & su elasticsearch -c '/usr/share/elasticsearch/bin/elasticsearch' & /usr/share/kibana/bin/kibana --allow-root"]
+CMD ["sh", "-c", "sysctl -p & mkdir -p /Users/aa/private & chown -R elasticsearch:elasticsearch /Users/aa/private & /usr/local/bin/run-app run 8080 & su elasticsearch -c '/usr/share/elasticsearch/bin/elasticsearch' & su elasticsearch -c '/usr/share/kibana/bin/kibana'"]

@@ -1,7 +1,7 @@
 server.basePath: "/kibana"
 server.rewriteBasePath: true
 server.host: "0.0.0.0"
-logging.dest: /Users/aa
+logging.dest: /Users/aa/private
 
 elasticsearch.hosts: ["http://localhost:9200"]
 
