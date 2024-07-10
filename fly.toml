@@ -55,6 +55,13 @@ primary_region = 'lax'
   source = 'data'
   destination = '/Users/aa'
 
-[[mounts]]
-  source = "elasticsearch_data"
-  destination = "/usr/share/elasticsearch/data"
+[[services.routes]]
+  handle = "gnr-bold-leaf-1886.fly.dev"
+  destination = "http_service"
+  port = 8080
+
+# Route for Kibana URL to internal port 5601
+[[services.routes]]
+  handle = "gnr-kibana.fly.dev"
+  destination = "http_service"
+  port = 5601
