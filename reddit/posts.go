@@ -27,26 +27,35 @@ func GetPosts(sub string) []*models.BaseModel {
 }
 
 func processDocument(doc *goquery.Document) {
-	doc.Find("div").Each(func(i int, s *goquery.Selection) {
-		processDiv(s)
+	doc.Find("a.thumbnail").Each(func(i int, p *goquery.Selection) {
+		processThumbail(p)
 	})
 }
 
-func processDiv(s *goquery.Selection) {
-	s.Find("p.title").Each(func(i int, p *goquery.Selection) {
-		processTitleP(p)
+func processThumbail(p *goquery.Selection) {
+	p.Find("img").Each(func(i int, a *goquery.Selection) {
+		printImage(a, p)
 	})
+}
+
+func printImage(img, a *goquery.Selection) {
+	linkText := a.Text()
+	href, _ := a.Attr("href")
+	src, _ := img.Attr("src")
+	fmt.Println(src)
+	fmt.Println(href)
+	fmt.Println(linkText)
 }
 
 func processTitleP(p *goquery.Selection) {
-	p.Find("a").Each(func(i int, a *goquery.Selection) {
+	p.Find("img").Each(func(i int, a *goquery.Selection) {
 		printLink(a)
 	})
 }
 
 func printLink(a *goquery.Selection) {
 	linkText := a.Text()
-	href, exists := a.Attr("href")
+	href, exists := a.Attr("src")
 	if exists {
 		if strings.HasPrefix(href, "/r/GunsNRoses/comments") {
 			fmt.Printf("Link text: %s\n", linkText)
