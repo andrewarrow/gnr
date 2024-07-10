@@ -6,7 +6,7 @@ node.master: true
 node.data: true
 
 path:
-  logs: /Users/aa/private
+  logs: /Users/aa/private/e.log
 
 network.host: 0.0.0.0
 http.port: 9200
