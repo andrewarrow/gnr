@@ -15,7 +15,7 @@ primary_region = 'lax'
     port = 443
     handlers = ["tls", "http"]
   [[services.routes]]
-    handle = "/kibanai/*"
+    handle = "/kibana/*"
     destination = "kibana_service"
 
 [[services]]
