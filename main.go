@@ -44,6 +44,7 @@ func main() {
 		r := router.NewRouter("DATABASE_URL", embeddedFile)
 		r.Paths["/"] = app.Welcome
 		r.Paths["core"] = app.Core
+		r.Paths["kibana"] = app.Kibana
 		//r.Paths["api"] = app.HandleApi
 		//r.Paths["login"] = app.Login
 		//r.Paths["register"] = app.Register

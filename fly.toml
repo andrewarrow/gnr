@@ -14,9 +14,6 @@ primary_region = 'lax'
   [[services.ports]]
     port = 443
     handlers = ["tls", "http"]
-  [[services.routes]]
-    handle = "/kibana/*"
-    destination = "kibana_service"
 
 [[services]]
   internal_port = 8080
@@ -27,9 +24,6 @@ primary_region = 'lax'
   [[services.ports]]
     port = 443
     handlers = ["tls", "http"]
-  [[services.routes]]
-    handle = "/*"
-    destination = "http_service"
 
 [env]
   PORT = '8080'
