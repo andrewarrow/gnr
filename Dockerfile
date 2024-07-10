@@ -33,4 +33,4 @@ COPY --from=kibana /usr/share/kibana /usr/share/kibana
 
 RUN mkdir -p /Users/aa/elasticsearch
 
-CMD ["sh", "-c", "/usr/local/bin/run-app run 8080 & /usr/share/elasticsearch/bin/elasticsearch & /usr/share/kibana/bin/kibana"]
+CMD ["sh", "-c", "/usr/local/bin/run-app run 8080 & /usr/share/elasticsearch/bin/elasticsearch & /usr/share/kibana/bin/kibana --allow-root"]
