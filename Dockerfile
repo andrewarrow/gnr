@@ -11,14 +11,14 @@ RUN go build -v -o /usr/src/app/run-app .
 
 FROM docker.elastic.co/elasticsearch/elasticsearch:7.17.3 AS elasticsearch
 
-RUN echo "network.host: 0.0.0.0" >> /usr/share/elasticsearch/config/elasticsearch.yml && echo "xpack.security.enabled: true" >> /usr/share/elasticsearch/config/elasticsearch.yml && echo "xpack.security.authc.api_key.enabled: true" >> /usr/share/elasticsearch/config/elasticsearch.yml && echo "xpack.security.authc.realms.native.native1.order: 0" >> /usr/share/elasticsearch/config/elasticsearch.yml && echo "xpack.security.authc.realms.native.native1.enabled: true" >> /usr/share/elasticsearch/config/elasticsearch.yml && echo "xpack.security.authc.realms.native.native1.type: native" >> /usr/share/elasticsearch/config/elasticsearch.yml && echo "xpack.security.authc.realms.native.native1.bind_dn: cn=aa" >> /usr/share/elasticsearch/config/elasticsearch.yml && echo "xpack.security.authc.realms.native.native1.bind_password: flyisgreat" >> /usr/share/elasticsearch/config/elasticsearch.yml && echo "xpack.security.authc.realms.native.native1.usernames: elastic" >> /usr/share/elasticsearch/config/elasticsearch.yml
+RUN echo "xpack.security.enabled: true" >> /usr/share/elasticsearch/config/elasticsearch.yml && echo "xpack.security.authc.api_key.enabled: true" >> /usr/share/elasticsearch/config/elasticsearch.yml && echo "xpack.security.authc.realms.native.native1.order: 0" >> /usr/share/elasticsearch/config/elasticsearch.yml && echo "xpack.security.authc.realms.native.native1.enabled: true" >> /usr/share/elasticsearch/config/elasticsearch.yml && echo "xpack.security.authc.realms.native.native1.type: native" >> /usr/share/elasticsearch/config/elasticsearch.yml && echo "xpack.security.authc.realms.native.native1.bind_dn: cn=aa" >> /usr/share/elasticsearch/config/elasticsearch.yml && echo "xpack.security.authc.realms.native.native1.bind_password: flyisgreat" >> /usr/share/elasticsearch/config/elasticsearch.yml && echo "xpack.security.authc.realms.native.native1.usernames: elastic" >> /usr/share/elasticsearch/config/elasticsearch.yml
 
 FROM docker.elastic.co/kibana/kibana:7.17.3 AS kibana
 COPY kibana.yml /usr/share/kibana/config/kibana.yml
 
 FROM debian:bookworm
 RUN apt-get update
-RUN apt-get install -y vim jq wget curl openjdk-17-jre-headless htop procps rsyslog
+RUN apt-get install -y vim jq wget curl openjdk-17-jre-headless htop procps rsyslog bash-completion
 RUN rm -rf /var/lib/apt/lists/*
 ENV discovery.type=single-node
 ENV ELASTICSEARCH_HOSTS=http://localhost:9200
@@ -33,4 +33,7 @@ COPY --from=kibana /usr/share/kibana /usr/share/kibana
 
 RUN mkdir -p /Users/aa/elasticsearch
 
-CMD ["sh", "-c", "/usr/local/bin/run-app run 8080 & /usr/share/elasticsearch/bin/elasticsearch & /usr/share/kibana/bin/kibana --allow-root"]
+RUN adduser elasticsearch
+RUN chown -R elasticsearch:elasticsearch /usr/share/elasticsearch
+
+CMD ["sh", "-c", "/usr/local/bin/run-app run 8080 & su elasticsearch -c '/usr/share/elasticsearch/bin/elasticsearch' & /usr/share/kibana/bin/kibana --allow-root"]
