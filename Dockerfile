@@ -10,6 +10,9 @@ ENV DATABASE_URL=gnr
 RUN go build -v -o /usr/src/app/run-app .
 
 FROM docker.elastic.co/elasticsearch/elasticsearch:7.17.3 AS elasticsearch
+
+RUN echo "xpack.security.enabled: true" >> /usr/share/elasticsearch/config/elasticsearch.yml && echo "xpack.security.authc.api_key.enabled: true" >> /usr/share/elasticsearch/config/elasticsearch.yml && echo "xpack.security.authc.realms.native.native1.order: 0" >> /usr/share/elasticsearch/config/elasticsearch.yml && echo "xpack.security.authc.realms.native.native1.enabled: true" >> /usr/share/elasticsearch/config/elasticsearch.yml && echo "xpack.security.authc.realms.native.native1.type: native" >> /usr/share/elasticsearch/config/elasticsearch.yml && echo "xpack.security.authc.realms.native.native1.bind_dn: cn=aa" >> /usr/share/elasticsearch/config/elasticsearch.yml && echo "xpack.security.authc.realms.native.native1.bind_password: flyisgreat" >> /usr/share/elasticsearch/config/elasticsearch.yml && echo "xpack.security.authc.realms.native.native1.usernames: elastic" >> /usr/share/elasticsearch/config/elasticsearch.yml
+
 FROM docker.elastic.co/kibana/kibana:7.17.3 AS kibana
 
 FROM debian:bookworm
