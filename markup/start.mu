@@ -5,3 +5,4 @@ div p-0
       div flex 
         <img src="/assets/images/x.png" style="transform: scale(0.75);"/>
         img src=h1.png w-96 object-cover
+        hi

@@ -11,9 +11,14 @@ div p-0
       div flex justify-center
         img src=logo.png rounded-full
       div flex flex-wrap justify-center
-        img src=izzy.png w-32 rounded-full
-        img src=duff.png w-32 rounded-full
-        img src=axl.png w-32 rounded-full
-        img src=slash.png w-32 rounded-full
-        img src=steven.png w-32 rounded-full
+        a href=/core/enter/izzy
+          img src=izzy.png w-32 rounded-full
+        a href=/core/enter/axl
+          img src=duff.png w-32 rounded-full
+        a href=/core/enter/duff
+          img src=axl.png w-32 rounded-full
+        a href=/core/enter/slash
+          img src=slash.png w-32 rounded-full
+        a href=/core/enter/steven
+          img src=steven.png w-32 rounded-full
 

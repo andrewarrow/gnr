@@ -5,6 +5,10 @@ import (
 )
 
 func Core(c *router.Context, second, third string) {
+	if second == "enter" && third != "" && c.Method == "GET" {
+		handleStartAs(c, third)
+		return
+	}
 	if second == "start" && third == "" && c.Method == "GET" {
 		handleCoreStart(c)
 		return
@@ -76,6 +80,10 @@ func handleAboutUs(c *router.Context) {
 	c.SendContentInLayout("about_us.html", send, 200)
 }
 func handleStart(c *router.Context) {
+	send := map[string]any{}
+	c.SendContentInLayout("start.html", send, 200)
+}
+func handleStartAs(c *router.Context, as string) {
 	send := map[string]any{}
 	c.SendContentInLayout("start.html", send, 200)
 }
