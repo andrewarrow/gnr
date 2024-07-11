@@ -39,13 +39,15 @@ def parse_page(html_content):
     soup = BeautifulSoup(str(soup), 'html.parser')
     selector = Selector(text=soup.prettify())
 
-    titles = selector.css('p.title')
     results = []
-
-    for title in titles:
+    tops = selector.css('div.thing')
+    for thing in tops:
+        title = thing.css('p.title')
         href = title.css('a::attr(href)').get()
         text = title.css('a::text').get()
-        results.append({ "Link": href, "Text": text })
+        tagline = thing.css('p.tagline')
+        fromUser = tagline.css('a::text').get()
+        results.append({ "href": href, "title": text, "from": fromUser })
 
     next_button_href = selector.css('span.next-button a::attr(href)').get()
     
