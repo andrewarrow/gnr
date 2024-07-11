@@ -25,7 +25,8 @@ func RegisterEvents() {
 }
 
 func say() {
-	Document.Id("reply").Set("innerHTML", "wfwefwef")
+	txt := Document.Id("ta").Get("value")
+	Document.Id("reply").Set("innerHTML", txt)
 }
 
 func LogoutEvents() {
