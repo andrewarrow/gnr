@@ -14,7 +14,8 @@ import json
 from bs4 import BeautifulSoup
 from parsel import Selector
 
-def run(route):
+
+def run(route, filename):
     options = Options()
     #options.headless = True
     options.add_argument("--disable-blink-features=AutomationControlled")
@@ -59,10 +60,13 @@ def run(route):
 
         results.append({ "Link": href, "Text": text })
 
-    with open(f"titles_{sys.argv[2]}.json" , 'w') as f:
+    with open(f"titles_{filename}.json" , 'w') as f:
       json.dump(results, f, indent=4)
 
     next_button_href = selector.css('span.next-button a::attr(href)').get()
     print(next_button_href)
 
-run(sys.argv[1])
+if len(sys.argv) > 2:
+  route = sys.argv[1]
+  title = sys.argv[2]
+  run(route, title)
