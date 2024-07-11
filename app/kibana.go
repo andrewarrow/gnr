@@ -11,7 +11,7 @@ import (
 func Kibana(c *router.Context, second, third string) {
 	fmt.Println("1111")
 	query := c.Request.URL.RawQuery
-	target := "http://127.0.0.1:5601/kibana"
+	target := "http://127.0.0.1:5601"
 	if query != "" {
 		target += "?" + query
 	}
