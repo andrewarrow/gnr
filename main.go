@@ -2,8 +2,12 @@ package main
 
 import (
 	"embed"
+	"fmt"
 	"gnr/app"
 	"math/rand"
+	"net/http"
+	"net/http/httputil"
+	"net/url"
 	"os"
 	"time"
 
@@ -37,6 +41,15 @@ func main() {
 		app.Seed(c)
 	} else if arg == "render" {
 		router.RenderMarkup()
+	} else if arg == "balancer" {
+		handler := http.HandlerFunc(handleRequest)
+		s := &http.Server{
+			Addr:    ":443",
+			Handler: handler,
+		}
+
+		s.ListenAndServe()
+
 	} else if arg == "run" {
 		router.BuildTag = buildTag
 		router.EmbeddedTemplates = embeddedTemplates
@@ -54,4 +67,18 @@ func main() {
 		r.ListenAndServe(":" + os.Args[2])
 	} else if arg == "help" {
 	}
+}
+
+func handleRequest(writer http.ResponseWriter, request *http.Request) {
+	query := c.Request.URL.RawQuery
+	target := "http://127.0.0.1:5601"
+	if query != "" {
+		target += "?" + query
+	}
+	proxyURL, err := url.Parse(target)
+	fmt.Println(err)
+
+	proxy := httputil.NewSingleHostReverseProxy(proxyURL)
+	c.Request.Host = proxyURL.Host
+	proxy.ServeHTTP(writer, request)
 }
