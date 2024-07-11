@@ -1,7 +1,7 @@
 div p-0 
   {{ template "navbar" . }}
   div w-full flex justify-center
-    div md:w-1/2 space-y-6
+    div md:w-1/2 space-y-6 pb-64
       div text-white flex space-x-6
         div mt-9 ml-9
           This 
@@ -10,9 +10,10 @@ div p-0
           was found: GNR Logo Design, Inspiration for a Unique Identity. Modern Elegance and Creative Design. Watermark Your Success with the Striking this Logo.
       div flex justify-center
         img src=logo.png rounded-full
-      div mt-9 space-y-3
-      {{ range $i, $item := .items }}
-        div
-          {{ $item.title }}
-      {{ end }}
+      div flex flex-wrap justify-center
+        img src=izzy.png w-32 rounded-full
+        img src=duff.png w-32 rounded-full
+        img src=axl.png w-32 rounded-full
+        img src=slash.png w-32 rounded-full
+        img src=steven.png w-32 rounded-full
 
