@@ -14,8 +14,7 @@ import json
 from bs4 import BeautifulSoup
 from parsel import Selector
 
-def run():
-    route = f"https://old.reddit.com/r/GunsNRoses/new/"
+def run(route):
     options = Options()
     #options.headless = True
     options.add_argument("--disable-blink-features=AutomationControlled")
@@ -33,6 +32,8 @@ def run():
         })
     '''
     })
+
+
     browser.get(route)
     wait = WebDriverWait(browser, 10)
     wait.until(EC.presence_of_element_located((By.TAG_NAME, 'body')))
@@ -47,22 +48,21 @@ def run():
 
     html_content = soup.prettify()
     selector = Selector(text=html_content)
-    next_button_href = selector.css('span.next-button a::attr(href)').get()
-    print(next_button_href)
 
     titles = selector.css('p.title')
+
+    results = []
 
     for title in titles:
         href = title.css('a::attr(href)').get()
         text = title.css('a::text').get()
 
-        print(f"Link: {href}")
-        print(f"Text: {text}")
-        print("---")
+        results.append({ "Link": href, "Text": text })
 
+    with open(f"titles_{sys.argv[2]}.json" , 'w') as f:
+      json.dump(results, f, indent=4)
 
-    #print(formatted_html)
-    #random_sleep_time = 9
-    #time.sleep(random_sleep_time)
+    next_button_href = selector.css('span.next-button a::attr(href)').get()
+    print(next_button_href)
 
-run()
+run(sys.argv[1])
