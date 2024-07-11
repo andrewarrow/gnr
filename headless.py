@@ -12,6 +12,7 @@ import time
 import os
 import json
 from bs4 import BeautifulSoup
+from parsel import Selector
 
 def run():
     route = f"https://old.reddit.com/r/GunsNRoses/new/"
@@ -43,8 +44,24 @@ def run():
         script.extract()
 
     soup = BeautifulSoup(str(soup), 'html.parser')
-    formatted_html = soup.prettify()
-    print(formatted_html)
+
+    html_content = soup.prettify()
+    selector = Selector(text=html_content)
+    next_button_href = selector.css('span.next-button a::attr(href)').get()
+    print(next_button_href)
+
+    titles = selector.css('p.title')
+
+    for title in titles:
+        href = title.css('a::attr(href)').get()
+        text = title.css('a::text').get()
+
+        print(f"Link: {href}")
+        print(f"Text: {text}")
+        print("---")
+
+
+    #print(formatted_html)
     #random_sleep_time = 9
     #time.sleep(random_sleep_time)
 
