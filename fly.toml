@@ -6,11 +6,11 @@ primary_region = 'lax'
     GO_VERSION = '1.21.0'
 
 [[services]]
-  internal_port = 3000
+  internal_port = 3001
   protocol = "tcp"
 
   [[services.ports]]
-    port = 3000
+    port = 3001
     handlers = ["tcp"]
 
 [[services]]
