@@ -16,7 +16,8 @@ func Seed(c *router.Context) {
 		id := post.GetString("id_reddit")
 		c.Params = map[string]any{}
 		c.Params["title"] = post.GetString("title")
-		c.Params["url"] = post.GetString("url")
+		c.Params["url"] = post.GetString("href")
+		c.Params["from"] = post.GetString("from")
 		c.Params["id_reddit"] = id
 		c.ValidateAndInsert("post")
 
