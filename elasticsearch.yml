@@ -4,6 +4,7 @@ xpack.security.transport.ssl.enabled: true
 node.name: master-node-1
 node.master: true
 node.data: true
+discovery.seed_hosts: ["127.0.0.1"]
 
 path:
   logs: /Users/aa/private/e.log
