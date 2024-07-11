@@ -28,12 +28,14 @@ func GetPosts(sub string) []*models.BaseModel {
 		json.Unmarshal(b, &list)
 		for _, thing := range list {
 			item := thing.(map[string]any)
-			href := item["Link"].(string)
+			href := item["href"].(string)
 			if strings.HasPrefix(href, "/r/GunsNRoses/comments") {
 				tokens := strings.Split(href, "/")
 				id := tokens[4]
 				m := map[string]any{"id_reddit": id}
-				m["title"] = item["Text"].(string)
+				m["title"] = item["title"]
+				m["href"] = item["href"]
+				m["from"] = item["from"]
 				items = append(items, models.NewBase(m))
 			}
 		}
