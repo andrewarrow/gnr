@@ -79,7 +79,6 @@ func handleRequest(writer http.ResponseWriter, request *http.Request) {
 	} else if strings.Contains(path, "esprefix") {
 		path = strings.ReplaceAll(path, "/esprefix", "")
 		target = "http://127.0.0.1:9200"
-		return
 	}
 
 	proxyURL, err := url.Parse(target)
