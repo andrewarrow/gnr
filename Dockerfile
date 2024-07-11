@@ -37,5 +37,7 @@ RUN chown -R elasticsearch:elasticsearch /usr/share/elasticsearch
 
 RUN /usr/share/elasticsearch/bin/elasticsearch-users useradd aa -p 'iheartfly'
 RUN /usr/share/elasticsearch/bin/elasticsearch-users roles aa -a superuser
+RUN /usr/share/elasticsearch/bin/elasticsearch-users useradd viewer -p 'testing123'
+RUN /usr/share/elasticsearch/bin/elasticsearch-users roles viewer -a viewer
 
 CMD ["sh", "-c", "sysctl -p & mkdir -p /Users/aa/private & chown -R elasticsearch:elasticsearch /Users/aa/private & /usr/local/bin/run-app run 8080 & su elasticsearch -c '/usr/share/elasticsearch/bin/elasticsearch > /Users/aa/private/es.log 2>&1' & su elasticsearch -c '/usr/share/kibana/bin/kibana > /Users/aa/private/kibana.log 2>&1'"]
