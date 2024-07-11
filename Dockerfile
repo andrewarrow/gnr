@@ -19,6 +19,7 @@ FROM debian:bookworm
 RUN apt-get update
 RUN apt-get install -y vim jq wget curl openjdk-17-jre-headless htop procps rsyslog bash-completion
 RUN rm -rf /var/lib/apt/lists/*
+ENV discovery.type=single-node
 ENV ELASTICSEARCH_HOSTS=http://localhost:9200
 ENV ES_JAVA_OPTS="-Xms512m -Xmx512m"
 ENV path.data="/Users/aa/private"
