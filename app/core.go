@@ -85,5 +85,6 @@ func handleStart(c *router.Context) {
 }
 func handleStartAs(c *router.Context, as string) {
 	send := map[string]any{}
+	send["as"] = as
 	c.SendContentInLayout("start.html", send, 200)
 }

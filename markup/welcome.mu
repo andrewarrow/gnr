@@ -13,9 +13,9 @@ div p-0
       div flex flex-wrap justify-center
         a href=/core/enter/izzy
           img src=izzy.png w-32 rounded-full
-        a href=/core/enter/axl
-          img src=duff.png w-32 rounded-full
         a href=/core/enter/duff
+          img src=duff.png w-32 rounded-full
+        a href=/core/enter/axl
           img src=axl.png w-32 rounded-full
         a href=/core/enter/slash
           img src=slash.png w-32 rounded-full
