@@ -1,5 +1,4 @@
 xpack.security.enabled: true
-xpack.security.transport.ssl.enabled: true
 
 node.name: master-node-1
 node.master: true
