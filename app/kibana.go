@@ -10,7 +10,11 @@ import (
 
 func Kibana(c *router.Context, second, third string) {
 	fmt.Println("1111")
+	query := c.Request.URL.RawQuery
 	target := "http://127.0.0.1:5601/kibana"
+	if query != "" {
+		target += "?" + query
+	}
 	proxyURL, err := url.Parse(target)
 	fmt.Println(err)
 
