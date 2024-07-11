@@ -46,7 +46,9 @@ def parse_page(html_content):
         href = title.css('a::attr(href)').get().strip()
         text = title.css('a::text').get().strip()
         tagline = thing.css('p.tagline')
-        fromUser = tagline.css('a::text').get().strip()
+        fromUser = ""
+        if tagline.css('a::text').get() != None:
+          fromUser = tagline.css('a::text').get().strip()
         results.append({ "href": href, "title": text, "from": fromUser })
 
     next_button_href = selector.css('span.next-button a::attr(href)').get()
