@@ -10,8 +10,12 @@ import (
 
 func Kibana(c *router.Context, second, third string) {
 	fmt.Println("1111")
+	suffix := second
+	if third != "" {
+		suffix = second + "/" + third
+	}
 	query := c.Request.URL.RawQuery
-	target := "http://127.0.0.1:5601"
+	target := "http://127.0.0.1:5601/" + suffix
 	if query != "" {
 		target += "?" + query
 	}
