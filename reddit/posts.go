@@ -33,7 +33,7 @@ func GetPosts(sub string) []*models.BaseModel {
 				tokens := strings.Split(href, "/")
 				id := tokens[4]
 				m := map[string]any{"id_reddit": id}
-				m["title"] = linkText
+				m["title"] = item["Text"].(string)
 				items = append(items, models.NewBase(m))
 			}
 		}
