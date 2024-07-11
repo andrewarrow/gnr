@@ -14,6 +14,6 @@ if [ $? -eq 0 ]; then
     tailwindcss -i assets/css/tail.components.css -o assets/css/tail.min.css --minify
     uuid=$(uuidgen); go build -ldflags="-X main.buildTag=$uuid"
     echo 3
-    ./gnr run 3000
+    ./gnr run 8080
 fi
     

@@ -76,6 +76,11 @@ func handleRequest(writer http.ResponseWriter, request *http.Request) {
 
 	if strings.Contains(path, "kibana") {
 		target = "http://127.0.0.1:5601"
+	} else if strings.Contains(path, "elastic") {
+		tokens := strings.Split(path, "/")
+		tokens = tokens[2:]
+		target = "http://127.0.0.1:9200/" + strings.Join(tokens, "/")
+		fmt.Println(target)
 	}
 
 	query := request.URL.RawQuery
