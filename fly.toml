@@ -8,23 +8,14 @@ primary_region = 'lax'
 [[services]]
   internal_port = 3001
   protocol = "tcp"
-  [[services.ports]]
-    port = 3001
-    handlers = ["http"]
 
 [[services]]
   internal_port = 5601
   protocol = "tcp"
-  [[services.ports]]
-    port = 5601
-    handlers = ["http"]
 
 [[services]]
   internal_port = 9200
   protocol = "tcp"
-  [[services.ports]]
-    port = 9200
-    handlers = ["http"]
 
 [[services]]
   internal_port = 8080
