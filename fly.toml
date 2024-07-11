@@ -25,6 +25,10 @@ primary_region = 'lax'
     port = 443
     handlers = ["tls", "http"]
 
+[[services]]
+  internal_port = 3001
+  protocol = "tcp"
+
 [env]
   PORT = '8080'
   discovery.type = "single-node"

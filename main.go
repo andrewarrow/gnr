@@ -76,16 +76,38 @@ func handleRequest(writer http.ResponseWriter, request *http.Request) {
 
 	if strings.Contains(path, "kibana") {
 		target = "http://127.0.0.1:5601"
-	} else if strings.Contains(path, "elastic") {
-		path = strings.ReplaceAll(path, "/elastic", "")
+	} else if strings.Contains(path, "esprefix") {
+		path = strings.ReplaceAll(path, "/esprefix", "")
 		target = "http://127.0.0.1:9200" + path
+		req, _ := http.NewRequest("GET", path, nil)
+
+		for _, cookie := range request.Cookies() {
+			req.AddCookie(cookie)
+		}
+
+		for name, values := range request.Header {
+			for _, value := range values {
+				//req.Header.Add(name, value)
+				fmt.Println(name, value)
+			}
+		}
+
 		fmt.Println(target)
+		query := request.URL.RawQuery
+		if query != "" {
+			target += "?" + query
+		}
+		proxyURL, err := url.Parse(target)
+		proxy := httputil.NewSingleHostReverseProxy(proxyURL)
+		proxy.ServeHTTP(writer, req)
+		return
 	}
 
 	query := request.URL.RawQuery
 	if query != "" {
 		target += "?" + query
 	}
+	fmt.Println(target)
 	proxyURL, err := url.Parse(target)
 	fmt.Println(err)
 

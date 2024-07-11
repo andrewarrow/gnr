@@ -5,6 +5,7 @@ module gnr
 go 1.21.0
 
 require (
+	codeberg.org/andrewarrow/roll v0.0.0-20240520171431-313baeb134a0
 	github.com/PuerkitoBio/goquery v1.9.2
 	github.com/andrewarrow/feedback v0.0.0-20240709222316-54ae6da922f7
 )
