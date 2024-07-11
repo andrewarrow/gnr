@@ -79,33 +79,20 @@ func handleRequest(writer http.ResponseWriter, request *http.Request) {
 	} else if strings.Contains(path, "esprefix") {
 		path = strings.ReplaceAll(path, "/esprefix", "")
 		target = "http://127.0.0.1:9200"
-		query := request.URL.RawQuery
-		if query != "" {
-			//target += "?" + query
-		}
-		proxyURL, _ := url.Parse(target)
-
-		proxy := httputil.NewSingleHostReverseProxy(proxyURL)
-		proxy.Director = func(req *http.Request) {
-			req.URL.Scheme = proxyURL.Scheme
-			req.URL.Host = proxyURL.Host
-			req.URL.Path = path
-			req.Host = proxyURL.Host
-			fmt.Println("req.URL.Path", path)
-		}
-		proxy.ServeHTTP(writer, request)
 		return
 	}
 
-	query := request.URL.RawQuery
-	if query != "" {
-		target += "?" + query
-	}
-	fmt.Println(target)
 	proxyURL, err := url.Parse(target)
 	fmt.Println(err)
 
 	proxy := httputil.NewSingleHostReverseProxy(proxyURL)
-	request.Host = proxyURL.Host
+	proxy.Director = func(req *http.Request) {
+		req.URL.Scheme = proxyURL.Scheme
+		req.URL.Host = proxyURL.Host
+		req.URL.Path = path
+		req.Host = proxyURL.Host
+		req.URL.RawQuery = request.URL.RawQuery
+		fmt.Println("req.URL.Path", path)
+	}
 	proxy.ServeHTTP(writer, request)
 }

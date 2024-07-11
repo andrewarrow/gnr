@@ -22,9 +22,9 @@ func GetPosts(sub string) []*models.BaseModel {
 	//html := replaceSmartQuotes(string(htmlString))
 	//doc, _ := goquery.NewDocumentFromReader(strings.NewReader(html))
 
-	for i := 1; i < 7; i++ {
+	for i := 1; i < 51; i++ {
 		var list []any
-		b, _ := os.ReadFile(fmt.Sprintf("titles_%d.json", i))
+		b, _ := os.ReadFile(fmt.Sprintf("data/%d.json", i))
 		json.Unmarshal(b, &list)
 		for _, thing := range list {
 			item := thing.(map[string]any)
