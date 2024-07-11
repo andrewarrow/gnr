@@ -19,6 +19,8 @@ div p-0
         div
           img src={{.as}}.png w-32 rounded-full
         div 
-          textarea text-black bg-white textarea textarea-primary autofocus=true
+          div
+            textarea text-black bg-white textarea textarea-primary autofocus=true
+          div mt-9 id=reply
         div 
-          input type=submit value=Say btn btn-primary
+          input id=say type=submit value=Say btn btn-primary

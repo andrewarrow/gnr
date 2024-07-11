@@ -16,11 +16,16 @@ func RegisterEvents() {
 		Global.Location.Set("href", "/core/start")
 	}
 	if Global.Start == "start.html" {
+		Global.Event("say", say)
 	} else if Global.Start == "login.html" {
 		Global.AutoForm("login", "core", nil, afterLogin)
 	} else if Global.Start == "register.html" {
 		Global.AutoForm("register", "core", nil, afterRegister)
 	}
+}
+
+func say() {
+	Document.Id("reply").Set("innerHTML", "wfwefwef")
 }
 
 func LogoutEvents() {
