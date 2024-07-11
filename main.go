@@ -51,7 +51,10 @@ func main() {
 			Handler: handler,
 		}
 
-		go s.ListenAndServe()
+		devMode := os.Getenv("DEV_MODE") == "true"
+		if devMode == false {
+			go s.ListenAndServe()
+		}
 
 		router.BuildTag = buildTag
 		router.EmbeddedTemplates = embeddedTemplates
@@ -65,14 +68,14 @@ func main() {
 		//r.Paths["admin"] = app.Admin
 		r.Paths["markup"] = router.Markup
 		r.BucketPath = "/Users/aa/bucket"
-		r.ListenAndServe(":" + "3001")
+		r.ListenAndServe(":" + "3000")
 	} else if arg == "help" {
 	}
 }
 
 func handleRequest(writer http.ResponseWriter, request *http.Request) {
 	path := request.URL.Path
-	target := "http://127.0.0.1:3001"
+	target := "http://127.0.0.1:3000"
 
 	if strings.Contains(path, "kibana") {
 		target = "http://127.0.0.1:5601"
