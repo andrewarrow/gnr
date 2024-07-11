@@ -87,8 +87,11 @@ func handleRequest(writer http.ResponseWriter, request *http.Request) {
 
 		for name, values := range request.Header {
 			for _, value := range values {
-				//req.Header.Add(name, value)
 				fmt.Println(name, value)
+				if name != "Authorization" {
+					continue
+				}
+				req.Header.Add(name, value)
 			}
 		}
 
@@ -97,7 +100,8 @@ func handleRequest(writer http.ResponseWriter, request *http.Request) {
 		if query != "" {
 			target += "?" + query
 		}
-		proxyURL, err := url.Parse(target)
+		proxyURL, _ := url.Parse(target)
+
 		proxy := httputil.NewSingleHostReverseProxy(proxyURL)
 		proxy.ServeHTTP(writer, req)
 		return
