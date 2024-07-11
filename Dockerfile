@@ -17,12 +17,7 @@ COPY kibana.yml /usr/share/kibana/config/kibana.yml
 
 FROM debian:bookworm
 RUN apt-get update
-RUN apt-get install -y vim jq wget curl openjdk-17-jre-headless htop procps rsyslog bash-completion python3 python3-pip python3-selenium python3-bs4 python3-parsel chromium-chromedriver unzip gzip
-
-RUN wget https://storage.googleapis.com/chrome-for-testing-public/126.0.6478.126/linux64/chromedriver-linux64.zip
-RUN unzip chromedriver_linux64.zip
-RUN mv chromedriver /usr/local/bin/
-RUN chmod +x /usr/local/bin/chromedriver
+RUN apt-get install -y vim jq wget curl openjdk-17-jre-headless htop procps rsyslog bash-completion python3 python3-pip python3-selenium python3-bs4 python3-parsel unzip gzip
 
 RUN rm -rf /var/lib/apt/lists/*
 ENV ELASTICSEARCH_HOSTS=http://localhost:9200
