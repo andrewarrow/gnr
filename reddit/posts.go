@@ -1,6 +1,7 @@
 package reddit
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -16,12 +17,27 @@ var items = []*models.BaseModel{}
 func GetPosts(sub string) []*models.BaseModel {
 	//htmlString := doRedditGet()
 	//htmlString, _ := os.ReadFile("/data/guns.txt")
-	htmlString, _ := os.ReadFile("guns.txt")
+	//htmlString, _ := os.ReadFile("guns.txt")
 
-	html := replaceSmartQuotes(string(htmlString))
-	doc, _ := goquery.NewDocumentFromReader(strings.NewReader(html))
+	//html := replaceSmartQuotes(string(htmlString))
+	//doc, _ := goquery.NewDocumentFromReader(strings.NewReader(html))
 
-	processDocument(doc)
+	for i := 1; i < 7; i++ {
+		var list []any
+		b, _ := os.ReadFile(fmt.Sprintf("titles_%d.json", i))
+		json.Unmarshal(b, &list)
+		for _, thing := range list {
+			item := thing.(map[string]any)
+			href := item["Link"].(string)
+			if strings.HasPrefix(href, "/r/GunsNRoses/comments") {
+				tokens := strings.Split(href, "/")
+				id := tokens[4]
+				m := map[string]any{"id_reddit": id}
+				m["title"] = linkText
+				items = append(items, models.NewBase(m))
+			}
+		}
+	}
 
 	return items
 }
