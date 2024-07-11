@@ -1,5 +1,9 @@
 # gnr
 
+fly ips list
+
+fly ssh console -s -C "scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null tailwind.config.js root@66.241.125.122:"
+
 curl -X POST "https://www.reddit.com/api/v1/access_token" \
     --user "key:secret" \
     -d "grant_type=password&username=%s&password=%s&scope=creddits,modcontributors,modconfig,subscribe,wikiread,wikiedit,vote,mysubreddits,submit,modlog,modposts,modflair,save,modothers,read,privatemessages,report,identity,livemanage,account,modtraffic,edit,modwiki,modself,history,flair" \

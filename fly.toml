@@ -5,25 +5,6 @@ primary_region = 'lax'
   [build.args]
     GO_VERSION = '1.21.0'
 
-[[services]]
-  internal_port = 8080
-  protocol = "tcp"
-  [[services.ports]]
-    port = 80
-    handlers = ["http"]
-  [[services.ports]]
-    port = 5601
-    handlers = ["http"]
-  [[services.ports]]
-    port = 9200
-    handlers = ["http"]
-  [[services.ports]]
-    port = 5601
-    handlers = ["http"]
-  [[services.ports]]
-    port = 443
-    handlers = ["tls", "http"]
-
 [env]
   PORT = '8080'
   discovery.type = "single-node"
