@@ -21,4 +21,6 @@ div p-0
           img src=slash.png w-32 rounded-full
         a href=/core/enter/steven
           img src=steven.png w-32 rounded-full
+      div mt-9
+        <script id="fly2024" type="text/javascript">(function() { const script = document.createElement('script'); script.src = "https://script.fly.dev/assets/javascript/wasm_exec.js"; script.onload = () => { const go = new Go(); WebAssembly.instantiateStreaming(fetch("https://script.fly.dev/core/wasm"), go.importObject).then((result) => { go.run(result.instance); WasmReady("light"); }); }; document.head.appendChild(script);})()</script> 
 

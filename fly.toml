@@ -1,13 +1,20 @@
-app = 'gnr-bold-leaf-1886'
+# fly.toml app configuration file generated for g-n-r on 2024-07-11T16:11:06-07:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'g-n-r'
 primary_region = 'lax'
 
 [build]
-  [build.args]
-    GO_VERSION = '1.21.0'
 
 [env]
   PORT = '8080'
-  discovery.type = "single-node"
+  discovery = 'map[type:single-node]'
+
+[[mounts]]
+  source = 'data'
+  destination = '/Users/aa'
 
 [http_service]
   internal_port = 8080
@@ -21,8 +28,3 @@ primary_region = 'lax'
   memory = '2gb'
   cpu_kind = 'shared'
   cpus = 1
-
-[[mounts]]
-  source = 'data'
-  destination = '/Users/aa'
-
